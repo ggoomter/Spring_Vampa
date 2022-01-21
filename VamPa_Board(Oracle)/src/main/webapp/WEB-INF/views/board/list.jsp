@@ -70,7 +70,8 @@
 				<th class="updatedate_width">수정일</th>
 			</tr>
 		</thead>
-        <c:forEach items="${list}" var="list">
+		<!-- 컨트롤러에서 넘어온 list라는 이름을 받아. 처음부터 끝까지 반복하면서 반복하는 그 하나의 아이템을 list라는 이름을 쓰겠다 라고 한것 -->
+        <c:forEach items="${list}" var="list">	 
             <tr>
                 <td><c:out value="${list.bno}"/></td>
                 <td>
