@@ -214,7 +214,14 @@
             <scope>provided</scope>
         </dependency>
  
-		  
+ 
+ 		<!-- 오라클 지원되지 않는 문자집합 orai18n.jar 추가 -->
+     	<dependency>
+			<groupId>com.oracle.ojdbc</groupId>
+			<artifactId>orai18n</artifactId>
+			<version>19.3.0.0</version>
+		</dependency>
+				  
 	</dependencies>
     <build>
         <plugins>

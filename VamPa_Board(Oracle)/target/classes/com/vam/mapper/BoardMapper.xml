@@ -10,4 +10,9 @@
        insert into vam_board(bno, title, content, writer) values (vam_board_seq.NEXTVAL, #{title}, #{content}, #{writer})
     </insert>
  
+     <!-- 게시판 목록 -->
+     <select id="getList" resultType="com.vam.model.BoardVO">
+        select * from vam_board
+     </select>
+ 
   </mapper>
