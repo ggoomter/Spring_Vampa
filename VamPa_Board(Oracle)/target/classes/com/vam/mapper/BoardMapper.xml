@@ -14,5 +14,10 @@
      <select id="getList" resultType="com.vam.model.BoardVO">
         select * from vam_board
      </select>
+    
+     <!-- 게시판 상세조회 -->
+    <select id="getPage" resultType="com.vam.model.BoardVO">
+        select * from vam_board where bno = #{bno}
+    </select>
  
   </mapper>
