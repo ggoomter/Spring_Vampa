@@ -65,10 +65,10 @@ public class BoardController {
     /* 페이지 수정 */
     @PostMapping("/modify")
     public String boardModifyPOST(BoardVO board, RedirectAttributes rttr) {
-        
+        /* RedirectAttributes 는 Model의 기능을 그대로 확장했으며 몇개의 도움 메소드가 추가됐다. */
         bservice.modify(board);
         
-        rttr.addFlashAttribute("result", "modify success");
+        rttr.addFlashAttribute("result", "modify success");	//url에 전달데이터가 표시되지 않는다.
         
         return "redirect:/board/list";
         
