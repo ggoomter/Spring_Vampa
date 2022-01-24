@@ -49,5 +49,19 @@ public class BoardServiceTests {
         log.info("" + service.getPage(bno));
         
     }
+    
+    /* 게시판 수정 */
+    @Test
+    public void testModify() {
+        
+        BoardVO board = new BoardVO();
+        board.setBno(4);
+        board.setTitle("서비스 수정 제목");
+        board.setContent("서비스 수정 내용");
+        
+        int result = service.modify(board);
+        log.info("result : " +result);
+        
+    }  
  
 }

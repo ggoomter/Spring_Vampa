@@ -59,7 +59,21 @@ public class BoardMapperTests {
          int bno = 7;
          
          log.info("" + mapper.getPage(bno));
-         
+      }
+      
+      
+      /* 게시판 수정 */
+      @Test
+      public void testModify() {
+          
+          BoardVO board = new BoardVO();
+          board.setBno(4);
+          board.setTitle("수정 제목");
+          board.setContent("수정 내용");
+          
+          int result = mapper.modify(board);
+          log.info("result : " +result);
+          
       }
      
  
