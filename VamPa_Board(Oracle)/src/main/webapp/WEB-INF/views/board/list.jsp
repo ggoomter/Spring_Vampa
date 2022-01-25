@@ -49,6 +49,25 @@
     border: 1px solid #ddd;
     font-weight: 600;
   }
+  .pageInfo{
+      list-style : none;
+      display: inline-block;
+    margin: 50px 0 0 100px;      
+  }
+  .pageInfo li{
+      float: left;
+    font-size: 20px;
+    margin-left: 18px;
+    padding: 7px;
+    font-weight: 500;
+  }
+  a:link {color:black; text-decoration: none;}
+  a:visited {color:black; text-decoration: none;}
+  a:hover {color:black; text-decoration: underline;}
+  
+  .active{
+      background-color: #cdd5ec;
+  }
   </style>
   
 <script
@@ -89,10 +108,20 @@
 	<div class="pageInfo_wrap" >
         <div class="pageInfo_area">
         	<ul id="pageInfo" class="pageInfo">
+        	    <!-- 이전페이지 버튼 -->
+                <c:if test="${pageMaker.prev}">
+                    <li class="pageInfo_btn previous"><a href="${pageMaker.startPage-1}">Previous</a></li>
+                </c:if>
+        	
 	             <!-- 각 번호 페이지 버튼 -->
 	            <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-	                <li class="pageInfo_btn"><a href="${num}">${num}</a></li>
+	                <li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="${num}">${num}</a></li>
 	            </c:forEach>
+	            
+	            <!-- 다음페이지 버튼 -->
+                <c:if test="${pageMaker.next}">
+                    <li class="pageInfo_btn next"><a href="${pageMaker.endPage + 1 }">Next</a></li>
+                </c:if>    
 	        </ul>
         </div>
     </div>
