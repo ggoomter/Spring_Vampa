@@ -1,5 +1,7 @@
 package com.vam.service;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -9,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.vam.model.BoardVO;
+import com.vam.model.Criteria;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -40,6 +43,19 @@ public class BoardServiceTests {
         
     }
     
+    /* 게시판 목록 조회(페이징 적용) */
+    @Test
+    public void testGetListPaging() {
+        
+        Criteria cri = new Criteria();
+        
+        List list = service.getListPaging(cri);
+        
+        list.forEach(board -> log.info("" + board));
+        
+        
+    }
+    
     /*게시판 상세조회*/
     @Test
     public void testGETPage() {
@@ -63,5 +79,14 @@ public class BoardServiceTests {
         log.info("result : " +result);
         
     }  
+    
+    /* 게시판 삭제 */
+    @Test
+    public void testDelete() {
+        
+        int result = service.delete(22);
+        log.info("result : " + result);
+        
+    }
  
 }

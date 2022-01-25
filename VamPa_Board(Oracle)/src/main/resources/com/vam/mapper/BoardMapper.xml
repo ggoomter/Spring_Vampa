@@ -14,6 +14,16 @@
      <select id="getList" resultType="com.vam.model.BoardVO">
         select * from vam_board
      </select>
+     
+    <!-- 게시물 목록(페이징) -->
+    <select id="getListPaging" resultType="com.vam.model.BoardVO">
+    <![CDATA[
+        select bno, title, content, writer, regdate, updatedate from(
+                select /*+INDEX_DESC(vam_board pk_board) */ rownum  as rn, bno, title, content, writer, regdate, updatedate
+                from vam_board where rownum <= #{pageNum} * #{amount}) 
+        where rn > (#{pageNum} -1) * #{amount}
+    ]]>
+    </select>
     
      <!-- 게시판 상세조회 -->
     <select id="getPage" resultType="com.vam.model.BoardVO">
@@ -22,8 +32,12 @@
     
     <!-- 게시판 수정 -->
     <update id="modify">
-        <!-- Oracle -->    
         update vam_board set title = #{title}, content = #{content}, updatedate = sysdate where bno = #{bno}
     </update>
+    
+    <!-- 게시판 삭제 -->
+    <delete id="delete">
+        delete from vam_board where bno = #{bno}
+    </delete>
  
   </mapper>

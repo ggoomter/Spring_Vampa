@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vam.model.BoardVO;
+import com.vam.model.Criteria;
 import com.vam.service.BoardService;
 
 @Controller
@@ -21,14 +22,14 @@ public class BoardController {
 	@Autowired
     private BoardService bservice;
 	
-    /* 게시판 목록 페이지 접속 */
+    
+    /* 게시판 목록 페이지 접속(페이징 적용) */
     @GetMapping("/list")
-    // => @RequestMapping(value="list", method=RequestMethod.GET)
-    public void boardListGET(Model model) {
+    public void boardListGET(Model model, Criteria cri) {
         
-        log.info("게시판 목록 페이지 진입");
-        
-        model.addAttribute("list", bservice.getList());
+    	log.info("게시판 목록 페이지 진입");
+//    	model.addAttribute("list", bservice.getList());
+        model.addAttribute("list", bservice.getListPaging(cri));
         
     }
     
@@ -72,6 +73,17 @@ public class BoardController {
         
         return "redirect:/board/list";
         
+    }
+    
+    /* 페이지 삭제 */
+    @PostMapping("/delete")
+    public String boardDeletePOST(int bno, RedirectAttributes rttr) {
+        
+        bservice.delete(bno);
+        
+        rttr.addFlashAttribute("result", "delete success");
+        
+        return "redirect:/board/list";
     }
 
 }
