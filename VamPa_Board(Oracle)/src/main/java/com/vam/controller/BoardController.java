@@ -12,6 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vam.model.BoardVO;
 import com.vam.model.Criteria;
+import com.vam.model.PageMakerDTO;
 import com.vam.service.BoardService;
 
 @Controller
@@ -30,6 +31,10 @@ public class BoardController {
     	log.info("게시판 목록 페이지 진입");
 //    	model.addAttribute("list", bservice.getList());
         model.addAttribute("list", bservice.getListPaging(cri));
+        
+        int total = bservice.getTotal();
+        PageMakerDTO pageMake = new PageMakerDTO(cri, total);
+        model.addAttribute("pageMaker", pageMake);
         
     }
     
