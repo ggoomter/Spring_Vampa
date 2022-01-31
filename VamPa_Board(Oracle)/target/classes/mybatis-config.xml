@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<!-- catcheEnabled => default값은 true이다. 아래와 같이 false 설정을 하면 모든 mapper xml의 
+		cache 선언이 무효화가 됨 -->
+	<!-- settings 태그를 typeAliases 아래에 두면 configuration 태그에 빨간줄(ERROR)이 생긴다. 그러니 위에 두자. -->
+
+
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
+
+
+	<typeAliases>
+		<package name="com.vam.mapper" />
+	</typeAliases>
+
+
+</configuration>
