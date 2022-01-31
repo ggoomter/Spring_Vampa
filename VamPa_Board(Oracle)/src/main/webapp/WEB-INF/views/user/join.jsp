@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입 화면</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <style>
         #wrap{
             width:530px;
@@ -24,6 +25,9 @@
         #title{
             background-color:skyblue
         }
+        .id_ok{color:#fff; display: none;}
+		.id_already{color:#6A82FB; display: none;}
+        
     </style>
 
 </head>
@@ -39,8 +43,10 @@
                 <tr>
                     <td id="title">아이디</td>
                     <td>
-                        <input type="text" name="id" maxlength="20" autocomplete='off'>
-                        <input type="button" value="중복확인" >    
+                        <input type="text" name="id" id="id" maxlength="20" autocomplete='off'>
+                        <input type="button" name="idCheck" id="idCheck" value="중복확인" > 
+                        <span class="id_ok">사용 가능한 아이디입니다.</span>
+						<span class="id_already">누군가 이 아이디를 사용하고 있어요.</span>
                     </td>
                 </tr>
                         
@@ -127,5 +133,25 @@
         </form>
     </div>
 
+	<script>
+	$(function() {
+		$("#idCheck").click(checkId);
+	});
+
+    function checkId(){
+        let id = $('#id').val(); //id값이 "id"인 입력란의 값을 저장
+        $.ajax({
+            url:'/user/idCheck', //Controller에서 인식할 주소
+            type:'post', //POST 방식으로 전달
+            data:{userId:id},
+            success:function(){
+                console.log("처리 성공 시 변경되는 내용");
+            },
+            error:function(){
+                alert("에러입니다");
+            }
+        });
+    };
+	</script>
 </body>
 </html>

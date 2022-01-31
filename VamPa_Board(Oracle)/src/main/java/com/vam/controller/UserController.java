@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.vam.model.UserDTO;
@@ -53,6 +55,14 @@ public class UserController {
         return "redirect:/";
     }
     
+    /* 아이디 중복검사 처리 */
+    @PostMapping("/idCheck")
+    @ResponseBody
+    public int idCheck(@RequestParam("userId") String userId) {
+        log.info("검사할 id : " + userId);
+        int cnt = uService.idCheck(userId);
+        return cnt;
+    }
 
 
 }

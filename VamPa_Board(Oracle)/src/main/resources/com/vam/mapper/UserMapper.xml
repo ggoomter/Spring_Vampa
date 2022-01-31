@@ -14,6 +14,12 @@
      <select id="login" resultType="com.vam.model.UserDTO">
         select * from vam_user where id = #{id}
      </select>
+     
+     <!-- 아이디 중복검사 -->
+     <select id="idCheck" resultType="_int">
+        select count(*) from vam_user where id = #{userId}
+     </select>
  
+	 
  
   </mapper>

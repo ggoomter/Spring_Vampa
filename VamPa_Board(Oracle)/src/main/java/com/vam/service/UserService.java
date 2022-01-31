@@ -9,6 +9,9 @@ public interface UserService {
     
     /* 로그인 */
     public UserDTO login(UserDTO user);
+
+    /* 아이디 중복검사 */
+	public int idCheck(String id);
     
 
 }
