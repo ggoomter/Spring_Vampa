@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -58,9 +58,10 @@ public class UserController {
     /* 아이디 중복검사 처리 */
     @PostMapping("/idCheck")
     @ResponseBody
-    public int idCheck(@RequestParam("userId") String userId) {
+    public int idCheck(@RequestBody String userId) {
         log.info("검사할 id : " + userId);
         int cnt = uService.idCheck(userId);
+        System.out.println("중복검사결과 : "+cnt);
         return cnt;
     }
 

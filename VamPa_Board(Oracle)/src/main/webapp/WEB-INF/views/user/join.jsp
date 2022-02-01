@@ -141,7 +141,9 @@
 
     function checkId(){
         let id = $('#id').val(); //id값이 "id"인 입력란의 값을 저장
-        $.ajax({
+
+		/* ajax로 구현 */
+        /*         $.ajax({
             url:'/user/idCheck', //Controller에서 인식할 주소
             type:'post', //POST 방식으로 전달
             data:{userId:id},
@@ -158,7 +160,31 @@
             error:function(){
                 alert("에러입니다");
             }
-        });
+        }); */
+
+
+        /* fetch로 구현 */
+        fetch('/user/idCheck' ,{
+			method : 'post',
+			headers: {
+			    'Content-Type': 'application/json; charset=utf-8'
+			},
+			body : id,
+        })
+       	.then(response => response.text())	/*  객체로 다룬다. 우리는 문자열 하나만 받기때문에  .text()사용.   json형태면 .json()사용하여 오브젝트로 변환  */
+        .then((response) =>{
+             console.log('ajax로 서버에게 받아온 결과 : '+response);
+	         if(response == '1'){
+	            $('.id_already').show();
+	            $('.id_ok').hide();
+	        }else{
+				$('.id_ok').show();
+				$('.id_already').hide();
+	        }
+        })
+       
+
+        
     };
 	</script>
 </body>
