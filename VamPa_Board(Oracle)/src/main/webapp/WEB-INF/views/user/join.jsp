@@ -25,8 +25,8 @@
         #title{
             background-color:skyblue
         }
-        .id_ok{color:#fff; display: none;}
-		.id_already{color:#6A82FB; display: none;}
+        .id_ok{color:#03D65D; display: none;}
+		.id_already{color:#9C0432; display: none;}
         
     </style>
 
@@ -44,10 +44,11 @@
                     <td id="title">아이디</td>
                     <td>
                         <input type="text" name="id" id="id" maxlength="20" autocomplete='off'>
-                        <input type="button" name="idCheck" id="idCheck" value="중복확인" > 
-                        <span class="id_ok">사용 가능한 아이디입니다.</span>
-						<span class="id_already">누군가 이 아이디를 사용하고 있어요.</span>
+                        <input type="button" name="idCheck" id="idCheck" value="중복확인" >
+                        <div class="id_ok">사용 가능한 아이디입니다.</div>
+						<div class="id_already">누군가 이 아이디를 사용하고 있어요.</div>
                     </td>
+
                 </tr>
                         
                 <tr>
@@ -144,8 +145,15 @@
             url:'/user/idCheck', //Controller에서 인식할 주소
             type:'post', //POST 방식으로 전달
             data:{userId:id},
-            success:function(){
-                console.log("처리 성공 시 변경되는 내용");
+            success:function(outcome){
+                console.log(outcome);
+                if(outcome == 1){
+                    $('.id_already').show();
+                    $('.id_ok').hide();
+                }else{
+					$('.id_ok').show();
+					$('.id_already').hide();
+                }
             },
             error:function(){
                 alert("에러입니다");
