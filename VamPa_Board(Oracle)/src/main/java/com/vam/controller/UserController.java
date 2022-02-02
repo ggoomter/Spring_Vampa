@@ -1,5 +1,8 @@
 package com.vam.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,7 @@ public class UserController {
         return "redirect:/user/login";
     }
     
+    
     /* 로그인 화면 */
     @GetMapping("/login")
     public void viewLogin() {
@@ -48,12 +52,23 @@ public class UserController {
     
     /* 로그인 처리 */
     @PostMapping("/login")
-    public String loginAction(UserDTO user, RedirectAttributes rttr) {
+    public String loginAction(UserDTO user, RedirectAttributes rttr, HttpServletRequest request) {
         log.info("UserDTO : " + user);
-        uService.login(user);
-        rttr.addFlashAttribute("result", "enrol success");
+        HttpSession session = request.getSession();
+        UserDTO loginUser = uService.login(user);
+        
+        
+        if(loginUser !=null) {
+            session.setAttribute("loginUser", loginUser);
+            rttr.addFlashAttribute("result", "loginSuccess");
+        }else {
+        	session.setAttribute("loginUser", null);
+        	rttr.addFlashAttribute("result", "loginFail");
+        }
+        
         return "redirect:/";
     }
+    
     
     /* 아이디 중복검사 처리 */
     @PostMapping("/idCheck")
