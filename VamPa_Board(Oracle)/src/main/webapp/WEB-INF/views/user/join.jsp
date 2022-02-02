@@ -144,7 +144,7 @@
         let id = $('#id').val(); //id값이 "id"인 입력란의 값을 저장
 
 		/* ajax로 구현 */
-        /*         $.ajax({
+/*          $.ajax({
             url:'/user/idCheck', //Controller에서 인식할 주소
             type:'post', //POST 방식으로 전달
             data:{userId:id},
@@ -161,11 +161,11 @@
             error:function(){
                 alert("에러입니다");
             }
-        }); */
+        });  */
 
 
         /* fetch로 구현 */
-        fetch('/user/idCheck' ,{
+         fetch('/user/idCheck' ,{
 			method : 'post',
 			headers: {
 			    'Content-Type': 'application/json; charset=utf-8'
@@ -183,7 +183,7 @@
 				$('.id_already').hide();
 	        }
         })
-       
+        
 
         
     };
